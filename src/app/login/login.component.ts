@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
       this.loginservice.login(inputEmail,pswd);
     }
     else{
-      alert("missing")
+      alert("Requierd Filed Missing")
     }
   }
 }

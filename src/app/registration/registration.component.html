@@ -1,0 +1,194 @@
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <!-- The image half -->
+        <div class="col-md-6 d-none d-md-flex bg-image"></div>
+        <!-- The content half -->
+        <div class="col-md-6 bg-light">
+            <div class="login d-flex align-items-center py-5">
+                <!-- Demo content-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-1 col-xl-10 mx-auto">
+                            <h3 class="display-4">Register !</h3>
+                            <br>
+                            <!-- Default form register -->
+                                <form class="text-center border border-light" (ngSubmit) = "onSubmit()" [formGroup]="reactiveForm">
+                            
+                                    <div class="form-row mb-4">
+                                        <div class="col">
+                                          <!-- First name -->
+                                          <input type="text" formControlName="firstname" autofocus="" id="firstname" class="form-control" placeholder="First name">
+                                            <div class="err" *ngIf="submitted && validate.firstname.errors">
+                                                <div *ngIf="validate.firstname.errors.required" class="text-left text-danger">
+                                                    *Required 
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col">
+                                          <!-- Last name -->
+                                          <input type="text" formControlName="lastname" id="lastname" class="form-control" placeholder="Last name">
+                                            <div class="err" *ngIf="submitted && validate.lastname.errors">
+                                                <div *ngIf="validate.lastname.errors.required" class="text-left text-danger">
+                                                    *Required 
+                                                </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                            
+                                    <!-- E-mail -->
+                                    <div class="mb-4">
+                                        <input type="email" formControlName = "email" id="email" class="form-control" placeholder="E-mail">
+                                        <div class="err" *ngIf="validate.email.errors">
+                                            <!-- <div *ngIf="validate.email.errors.required" class="text-left text-danger">
+                                                *Required 
+                                            </div> -->
+                                            <div *ngIf="validate.email.errors.email" class="text-left text-danger">
+                                                Invalid Email ..@
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="mb-4">
+                                        <input type="password" formControlName="password" id="password" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                                        <div class="err" *ngIf="submitted && validate.password.errors">
+                                            <div *ngIf="validate.password.errors.required" class="text-left text-danger">
+                                                *Required 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Confirm Password -->
+                                    <div class="mb-4">
+                                        <input type="password" formControlName="confirmpassword" id="confirmpassword" class="form-control" placeholder="Confirm Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+                                        <div class="err" *ngIf="validate.confirmpassword.errors">
+                                            <!-- <div *ngIf="validate.confirmpassword.errors.required" class="text-left text-danger">
+                                                *Required 
+                                            </div> -->
+                                            <div *ngIf="validate.confirmpassword.errors.MustMatch" class="text-left text-danger">
+                                                ConfirmPassword Didn't Match 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Phone number -->
+                                    <div class="mb-4">
+                                        <input type="text" formControlName="phoneno" id="phoneno" class="form-control" placeholder="Phone number" aria-describedby="defaultRegisterFormPhoneHelpBlock" maxlength="12">
+                                        <div class="err" *ngIf="submitted && validate.phoneno.errors">
+                                            <div *ngIf="validate.phoneno.errors.required" class="text-left text-danger">
+                                                *Required 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <h5> Gender </h5>
+                                    <div class="form-row mb-4">
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" id="MALE">
+                                                <label class="form-check-label" for="MALE">
+                                                  Male
+                                                </label>
+                                              </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="gender" id="FEMALE" checked>
+                                                <label class="form-check-label" for="FEMALE">
+                                                  Female
+                                                </label>
+                                              </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <h5> Billing Address </h5>
+                                    <!-- Address 1 -->
+                                    <div class="mb-4">
+                                        <input type="text" formControlName="address1" id="address1" class="form-control" placeholder="Address 1" aria-describedby="defaultRegisterFormPhoneHelpBlock">
+                                        <div class="err" *ngIf="submitted && validate.address1.errors">
+                                            <div *ngIf="validate.address1.errors.required" class="text-left text-danger">
+                                                *Required 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Address 2 -->
+                                    <div class="mb-4">
+                                        <input type="text" formControlName="address2" id="address2" class="form-control" placeholder="Address 2" aria-describedby="defaultRegisterFormPhoneHelpBlock">
+                                        <div class="err" *ngIf="submitted && validate.address2.errors">
+                                            <div *ngIf="validate.address2.errors.required" class="text-left text-danger">
+                                                *Required 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- County State DropDown -->
+                                    <div class="row mb-4">
+                                        <div class="col text-left">
+                                          <div ngbDropdown class="d-inline-block">
+                                                <label class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> {{ selectedCounrty }} </label>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                                    <label ngbDropdownItem *ngFor="let c of country"  (click) = "onChangeCountry(c)"> {{ c }} </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="col text-right">
+                                          <div ngbDropdown class="d-inline-block">
+                                            <label class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>{{ selectedState }}</label>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                                              <label ngbDropdownItem *ngFor="let s of state" (click) = "onChangeState(s)"> {{ s }} </label>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Pincode -->
+                                    <div class="mb-4">
+                                        <input type="text" formControlName="pincode" id="pincode" class="form-control" placeholder="Pincode" aria-describedby="defaultRegisterFormPhoneHelpBlock">
+                                        <div class="err" *ngIf="submitted && validate.pincode.errors">
+                                            <div *ngIf="validate.pincode.errors.required" class="text-left text-danger">
+                                                *Required 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Hobby -->
+                                    <h5 class = "mb-4"> Hobby </h5>  
+                                    <div class="row mb-4">
+                                        <div class = "col" *ngFor="let h of hobby">
+                                            <input mdbCheckbox type="checkbox" class="btn-check" [id]="h" autocomplete="off" (change) = "check(h,$event)" />
+                                            <label class="btn btn-outline-primary" [for]="h"> {{ h }} </label>
+                                        </div>
+                                    </div>
+
+                                    <br>
+
+
+                                    <!-- Upload -->
+                                    <h5 class = "mb-4"> Profile Image </h5>  
+                                    <div class="file-field mb-4">
+                                        <input type="file" mdbFileSelect (change)="uploadFile($event)">
+                                    </div>
+                                
+                                  
+
+                                    <!-- Sign up button -->
+                                    <button type="submit" class="btn btn-primary btn-block text-uppercase mb-2 rounded-pill shadow-sm" [disabled]="!reactiveForm.valid">Sign Up</button>                               
+                            
+                                    <hr>
+                            
+                                    <!-- Terms of service -->
+                                    <p>By clicking
+                                    <em>Sign up</em> you agree to our
+                                    <a href="" target="_blank">terms of service</a></p>
+                            
+                                </form>
+                                <!-- Default form register -->
+                        </div>
+                    </div>
+                </div><!-- End -->
+            </div>
+        </div><!-- End -->
+    </div>
+</div>
