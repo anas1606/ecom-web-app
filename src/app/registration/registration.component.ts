@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DropdownService } from '../dropdown.service';
 import { Router } from '@angular/router';
+import { RegisterService } from '../register.service';
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +11,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-
   reactiveForm:FormGroup;
   submitted:boolean = false;
   country: any ;
@@ -22,8 +21,11 @@ export class RegistrationComponent implements OnInit {
   hobbyList: string[] = [];
   index: number = -1;
   avatar: any;
+  isVendor = false;
+  gender: string = "MALE";
+  
 
-  constructor(private router:Router, private formbuilder: FormBuilder , private dropdownservice: DropdownService , private http: HttpClient) {
+  constructor(private router:Router, private formbuilder: FormBuilder , private dropdownservice: DropdownService , private registerService: RegisterService ,private http: HttpClient) {
       this.reactiveForm = this.formbuilder.group({
       email: new FormControl('',[Validators.required,Validators.email]),
       firstname: new FormControl(null,[Validators.required]),
@@ -34,6 +36,7 @@ export class RegistrationComponent implements OnInit {
       address1: new FormControl(null,[Validators.required]),
       address2: new FormControl(null,[Validators.required]),
       pincode: new FormControl(null,[Validators.required]),
+      companyname: new FormControl(null,[Validators.required]),
       avatar: null
     },
     {
@@ -92,7 +95,23 @@ export class RegistrationComponent implements OnInit {
   onChangeState(name:string){
     this.selectedState = name; 
   }
-  
+
+  onOptionChange(event:any){
+    if(event.target.value == "vendor"){
+      this.isVendor = true;
+    }else{
+      this.isVendor = false;
+    }
+  }
+
+  onGenderChnage(event:any){
+    if(event.target.value == "FEMALE"){
+      this.gender = "FEMALE";
+    }else{
+      this.gender = "MALE";
+    }
+  }
+
   check(hobby:string , event:any){
     if(event.target.checked){
       this.hobbyList.push(hobby)
@@ -111,15 +130,46 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-    var formData: any = new FormData();
-
     if(this.selectedCounrty != 'Country' && this.selectedState != 'State'){
-       const data = {
+      
+      if(this.isVendor){
+        this.vendorRegister();
+      }else{
+        this.customerRegister();
+      }
+
+    }else{
+      alert("Please Fill All the Fields");
+    }
+  }
+
+
+  vendorRegister(){
+      const data = {
+        "firstName" : this.reactiveForm.controls['firstname'].value,
+        "lastName" : this.reactiveForm.controls['lastname'].value,
+        "companyName" : this.reactiveForm.controls['companyname'].value,
+        "emailId" : this.reactiveForm.controls['email'].value,
+        "password" : this.reactiveForm.controls['password'].value,
+        "phoneno" : this.reactiveForm.controls['phoneno'].value,
+        "address1" : this.reactiveForm.controls['address1'].value,
+        "address2" : this.reactiveForm.controls['address2'].value,
+        "pincode" : this.reactiveForm.controls['pincode'].value,
+        "country" : this.selectedCounrty,
+        "state" : this.selectedState
+      };
+      
+      this.registerService.vendorRegister(data,this.avatar);
+  }
+
+
+  customerRegister(){
+      const data = {
         "firstName" : this.reactiveForm.controls['firstname'].value,
         "lastName" : this.reactiveForm.controls['lastname'].value,
         "emailId" : this.reactiveForm.controls['email'].value,
         "password" : this.reactiveForm.controls['password'].value,
-        "gender" : "MALE",
+        "gender" : this.gender,
         "phoneno" : this.reactiveForm.controls['phoneno'].value,
         "address1" : this.reactiveForm.controls['address1'].value,
         "address2" : this.reactiveForm.controls['address2'].value,
@@ -128,15 +178,7 @@ export class RegistrationComponent implements OnInit {
         "state" : this.selectedState,
         "hobby" : this.hobbyList
       };
-    
-    formData.append("data", JSON.stringify(data));
-    formData.append("profile", this.avatar);
-
-    this.http.post<any>('http://localhost:8080/api/customer/register', formData,).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
-    )
-    this.router.navigate(["/login"]);
-    }
+    this.registerService.customerRegister(data,this.avatar);
   }
+
 }

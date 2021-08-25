@@ -1,0 +1,235 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="https://pbs.twimg.com/profile_images/1239752208247164934/rd4SIe_Z_400x400.jpg" alt="image"/>
+                            <div class="file btn btn-lg btn-primary">
+                                Change Photo
+                                <input type="file" name="file" (change)="uploadProfile($event)"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        {{profile.firstName + " " + profile.lastName}}
+                                    </h5>
+                                    <h6>
+                                        From {{ profile.compnayName }}
+                                    </h6>
+                                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="profile-edit-btn btn-danger mt-2" name="btnAddMore" (click) = "onLogout()"><span class="text-light">Log Out</span></button>
+                        <button type="button" class="profile-edit-btn btn-dark mt-2" name="btnAddMore" (click) = "onEdit()"><span class="text-light">Edit Profile</span></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+                            <p>WORK LINK</p>
+                            <a href="">Website Link</a><br/>
+                            <a href="">Bootsnipp Profile</a><br/>
+                            <a href="">Bootply Profile</a>
+                            <p>SKILLS</p>
+                            <a href="">Web Designer</a><br/>
+                            <a href="">Web Developer</a><br/>
+                            <a href="">WordPress</a><br/>
+                            <a href="">WooCommerce</a><br/>
+                            <a href="">PHP, .Net</a><br/>
+                        </div>
+                    </div>
+                    <div class="col-md-8" *ngIf="!isEdit">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>First Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.firstName }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>last Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.lastName }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.emailid }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Phone No</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.phoneno }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Comany Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.compnayName }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Address 1</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.address1 }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Address 2</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.address2 }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Country</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.country }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>State</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.state }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Pincode</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.pincode }}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+
+                    <div class="col-md-8" *ngIf="isEdit">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>First Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" #firstname autofocus="" id="firstname" class="form-control" [value]="profile.firstName">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>last Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" #lastname  id="lastname" class="form-control" [value]="profile.lastName">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{ profile.emailid }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Phone No</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="number" #phoneno  id="phoneno" class="form-control" [value]="profile.phoneno" maxlength="12">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Comany Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" #companyname  id="companyName" class="form-control" [value]="profile.compnayName">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Address 1</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" #address1  id="address1" class="form-control" [value]="profile.address1">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Address 2</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" #address2  id="address2" class="form-control" [value]="profile.address2">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Country</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" #country  id="country" class="form-control" [value]="profile.country">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>State</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" #state  id="satte" class="form-control" [value]="profile.state">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Pincode</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="number" #pincode  id="pincode" class="form-control" [value]="profile.pincode" maxlength="6">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="button" class="profile-edit-btn btn-success mt-4" name="update" value="Update Profile" (click) = "onUpdate(firstname,lastname,phoneno,companyname,address1,address2,country,state,pincode)"/>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>           
+        </div>

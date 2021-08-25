@@ -11,7 +11,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './registration/registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap'; 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { VendorloginComponent } from './vendorlogin/vendorlogin.component';
+import { VendorFeedComponent } from './vendor-feed/vendor-feed.component';
+import { VendorProfileComponent } from './vendor-profile/vendor-profile.component'; 
 
 @NgModule({
   declarations: [
@@ -22,6 +26,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     DashboardComponent,
     RegistrationComponent,
+    EmailVerificationComponent,
+    VendorloginComponent,
+    VendorFeedComponent,
+    VendorProfileComponent,
   ],
   imports: [
     BrowserModule,

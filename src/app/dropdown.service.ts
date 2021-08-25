@@ -19,4 +19,8 @@ export class DropdownService {
   getHobby(){
     return this.http.get<any>("http://localhost:8080/api/admin/dropdown/hobby");
   }
+
+  getCategory(){
+    return this.http.get<any>("http://localhost:8080/api/admin/dropdown/category");
+  }
 }
