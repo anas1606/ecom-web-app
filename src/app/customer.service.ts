@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class VendorService {
+export class CustomerService {
 
   constructor(private tokenService:TokenService,
     private http: HttpClient,
@@ -13,17 +13,22 @@ export class VendorService {
 
   feed (data:any){
     const headers = {'Content-Type': 'application/json' , 'Authorization' : this.tokenService.getToken()};
-    return this.http.post<any>('http://localhost:8080/api/vendor/feed', data, { headers });
+    return this.http.post<any>('http://localhost:8080/api/customer/feed', data, { headers });
   }
 
-  addProduct(data:any){
-    const headers = {'Content-Type': 'application/json' , 'Authorization' : this.tokenService.getToken()};
-    return this.http.post<any>('http://localhost:8080/api/vendor/add/product', data, { headers });
+  myOrder (){
+    const headers = {'Authorization' : this.tokenService.getToken()};
+    return this.http.get<any>('http://localhost:8080/api/customer/myorders',{ headers });
+  }
+
+  buyNow (id:string){
+    const headers = {'Authorization' : this.tokenService.getToken()};
+    return this.http.post<any>('http://localhost:8080/api/customer/buynow/'+id, {} ,{ headers });
   }
 
   myProfile(){
     const headers = {'Content-Type': 'application/json' , 'Authorization' : this.tokenService.getToken()};
-    return this.http.get<any>('http://localhost:8080/api/vendor/myprofile', { headers });
+    return this.http.get<any>('http://localhost:8080/api/customer/myprofile', { headers });
   }
 
   uploadProfile(avatar:any){
@@ -31,7 +36,7 @@ export class VendorService {
     var formData: any = new FormData();
     formData.append("profile", avatar);
 
-    return this.http.post<any>('http://localhost:8080/api/vendor/upload/profile', formData, { headers }).subscribe(data=>{
+    return this.http.post<any>('http://localhost:8080/api/customer/upload/profile', formData, { headers }).subscribe(data=>{
       alert(data.message);
     });
   }
@@ -39,8 +44,7 @@ export class VendorService {
   updateProfile(data:any){
     this.tokenservice.storeName(data.firstName+" " +data.lastName);
     const headers = {'Content-Type': 'application/json' , 'Authorization' : this.tokenService.getToken()};
-    return this.http.post<any>('http://localhost:8080/api/vendor/update', data, { headers });
+    return this.http.put<any>('http://localhost:8080/api/customer/update', data, { headers });
   }
-
 
 }

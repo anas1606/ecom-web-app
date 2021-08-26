@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="image"/>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" height="50%" width="50%"/>
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file" (change)="uploadProfile($event)"/>
@@ -18,11 +18,8 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        {{profile.firstName + " " + profile.lastName}}
+                                        {{profile.firstname + " " + profile.lastname}}
                                     </h5>
-                                    <h6>
-                                        From {{ profile.compnayName }}
-                                    </h6>
                                     <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
@@ -32,23 +29,25 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button type="button" class="profile-edit-btn btn-danger mt-2" name="btnAddMore" (click) = "onLogout()"><span class="text-light">Log Out</span></button>
                         <button type="button" class="profile-edit-btn btn-dark mt-2" name="btnAddMore" (click) = "onEdit()"><span class="text-light">Edit Profile</span></button>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4" *ngIf="!isEdit">
                         <div class="profile-work">
-                            <p>WORK LINK</p>
-                            <a href="">Website Link</a><br/>
-                            <a href="">Bootsnipp Profile</a><br/>
-                            <a href="">Bootply Profile</a>
-                            <p>SKILLS</p>
-                            <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/>
+                            <p>HOBBY</p>
+                            <p class="text-primary" *ngFor="let h of profile.hobby">{{ h }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="isEdit">
+                        <div class="profile-work"> 
+                            <p>HOBBY</p>
+                            <div class="row mb-4">
+                                <div class = "col" *ngFor="let h of hobby">
+                                    <input mdbCheckbox type="checkbox" class="btn-check" [id]="h" autocomplete="off" [checked] = "this.hobbyList.indexOf(h) > -1" (change) = "check(h,$event)" />
+                                    <label class="btn btn-outline-primary" [for]="h"> {{ h }} </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-8" *ngIf="!isEdit">
@@ -59,7 +58,7 @@
                                                 <label>First Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{ profile.firstName }}</p>
+                                                <p>{{ profile.firstname }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -67,7 +66,7 @@
                                                 <label>last Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{ profile.lastName }}</p>
+                                                <p>{{ profile.lastname }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -88,10 +87,10 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Comany Name</label>
+                                                <label>Gender</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{ profile.compnayName }}</p>
+                                                <p>{{ profile.gender }}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -146,7 +145,7 @@
                         <div class="tab-content profile-tab" id="myTabContent">
                             <form class="text-center border border-light" (ngSubmit) = "onSubmit()" [formGroup]="reactiveForm">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
+                                        <div class="row mt-2">
                                             <div class="col-md-6">
                                                 <label>First Name*</label>
                                             </div>
@@ -193,20 +192,34 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row mt-2">
+
+                                        <div class="row mt-4">
                                             <div class="col-md-6">
-                                                <label>Comany Name*</label>
+                                                <label>Gender</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <input type="text" formControlName="companyname" id="companyName" class="form-control" [value]="profile.compnayName">
-                                                <div class="err" *ngIf="submitted && validate.companyname.errors">
-                                                    <div *ngIf="validate.companyname.errors.required" class="text-left text-danger">
-                                                        *Required 
+                                                <div class="form-row mb-4">
+                                                    <div class="col">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="gender" value = "MALE" id="MALE" [checked] = "gender == 'MALE'" (change) = "onGenderChnage($event)">
+                                                            <label class="form-check-label" for="MALE">
+                                                              Male
+                                                            </label>
+                                                          </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="gender" id="FEMALE" value = "FEMALE" [checked] = "gender == 'FEMALE'" (change) = "onGenderChnage($event)">
+                                                            <label class="form-check-label" for="FEMALE">
+                                                              Female
+                                                            </label>
+                                                          </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row mt-2">
+                                        
+                                        <div class="row mt2">
                                             <div class="col-md-6">
                                                 <label>Address 1*</label>
                                             </div>
@@ -249,7 +262,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="row mt-2">
+                                        <div class="row mt-1">
                                             <div class="col-md-6 mt-3">
                                                 <label>State*</label>
                                             </div>

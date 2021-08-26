@@ -1,4 +1,7 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginServiceService } from '../login-service.service';
+import { TokenService } from '../token.service';
 
 @Component({
   selector: 'app-header',
@@ -6,22 +9,20 @@ import { Component, OnInit,Output,EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  @Output() clck = new EventEmitter();
   title: string = 'E COM';
-
-  constructor() { 
+  name : string = "";
+  constructor(private loginservice:LoginServiceService,
+    private router:Router,
+    private tokenservice:TokenService){
   }
 
   ngOnInit(): void {
-  }
-
-  onClick(){
-      this.clck.emit();
-      this.title = "clicked";
+    this.name = this.tokenservice.getName();
   }
 
   logout(){
-    this.title = "log";
+    this.loginservice.isCustomerVisible = false;
+    this.router.navigate(["/login"]);
     localStorage.removeItem("token");
   }
 }

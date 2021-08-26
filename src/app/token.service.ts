@@ -11,11 +11,23 @@ export class TokenService {
     localStorage.setItem("token","Bearer "+token);
   }
 
+  storeName(name: string){
+    localStorage.setItem("name",name);
+  }
+
   getToken(): any{
     return localStorage.getItem("token");
   }
 
+  getName(): any{
+    return localStorage.getItem("name");
+  }
+
   deleteToken(){
     localStorage.removeItem("token")
+  }
+
+  deleteName(){
+    localStorage.removeItem("name")
   }
 }

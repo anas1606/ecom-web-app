@@ -13,11 +13,13 @@ export class VendorFeedComponent implements OnInit {
 
   feed:any;
   page:any;
-  limit:number = 3;
+  limit:number = 6;
   category:any;
   pricefilter:string ='asc';
   selectedcategory:string = "";
+  username:string = 'aa';
   categoryToAdd:string = "Category";
+  
 
   constructor(private tokenservice:TokenService,
     private router:Router,
@@ -25,6 +27,8 @@ export class VendorFeedComponent implements OnInit {
     private dropdownservice:DropdownService) { }
 
   ngOnInit(): void {
+    this.username = this.tokenservice.getName();
+
     if(this.tokenservice.getToken() == null){
       this.router.navigate(["/vendor/login"]);
     }else{
@@ -32,7 +36,8 @@ export class VendorFeedComponent implements OnInit {
         "page" : 0,
         "limit" : this.limit,
         "sortorder" : this.pricefilter,
-        "category" : ""
+        "category" : this.selectedcategory,
+        "search" : ""
       }
       this.dropdownservice.getCategory().subscribe(data=>{
           this.category = data.data;
@@ -40,6 +45,7 @@ export class VendorFeedComponent implements OnInit {
 
       this.vendorservice.feed(data).subscribe(data=> {
         if(data.statusCode != 200){
+          this.validate(data.statusCode);
           alert(data.message);
         }else{
           this.feed = data.data;
@@ -54,10 +60,12 @@ export class VendorFeedComponent implements OnInit {
       "page" : page,
       "limit" : this.limit,
       "sortorder" : this.pricefilter,
-      "category" : this.selectedcategory
+      "category" : this.selectedcategory,
+      "search" : ""
     }
     this.vendorservice.feed(data).subscribe(data=> {
       if(data.statusCode != 200){
+        this.validate(data.statusCode);
         alert(data.message);
       }else{
         this.feed = data.data;
@@ -78,10 +86,12 @@ export class VendorFeedComponent implements OnInit {
       "page" : 0,
       "limit" : this.limit,
       "sortorder" : this.pricefilter,
-      "category" : this.selectedcategory
+      "category" : this.selectedcategory,
+      "search" : ""
     }
     this.vendorservice.feed(data).subscribe(data=> {
       if(data.statusCode != 200){
+        this.validate(data.statusCode);
         alert(data.message);
       }else{
         this.feed = data.data;
@@ -97,10 +107,31 @@ export class VendorFeedComponent implements OnInit {
       "page" : 0,
       "limit" : this.limit,
       "sortorder" : this.pricefilter,
-      "category" : this.selectedcategory
+      "category" : this.selectedcategory,
+      "search" : ""
     }
     this.vendorservice.feed(data).subscribe(data=> {
       if(data.statusCode != 200){
+        this.validate(data.statusCode);
+        alert(data.message);
+      }else{
+        this.feed = data.data;
+        this.page = data.result;
+      }
+    });
+  }
+
+  onSearch(search:string){
+    const data = {
+      "page" : 0,
+      "limit" : this.limit,
+      "sortorder" : this.pricefilter,
+      "category" : this.selectedcategory,
+      "search" : search
+    }
+    this.vendorservice.feed(data).subscribe(data=> {
+      if(data.statusCode != 200){
+        this.validate(data.statusCode);
         alert(data.message);
       }else{
         this.feed = data.data;
@@ -127,6 +158,7 @@ export class VendorFeedComponent implements OnInit {
         alert(data.message);
         window.location.reload();
       }else{
+        this.validate(data.statusCode);
         alert(data.message);
       }
     });
@@ -134,6 +166,11 @@ export class VendorFeedComponent implements OnInit {
 
   counter(i: number) {
     return new Array(i);
+  }
+
+  validate(code:any){
+    if(code == 401)
+      this.router.navigate(["/vendor/login"]);
   }
 
 }

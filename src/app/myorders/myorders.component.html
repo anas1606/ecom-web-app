@@ -1,0 +1,58 @@
+    
+    <!-- ========================= SECTION PAGETOP ========================= -->
+    <section class="section-pagetop bg">
+        <div class="container">
+            <br><br>
+        </div> <!-- container //  -->
+        </section>
+        <!-- ========================= SECTION INTRO END// ========================= -->
+        
+        <!-- ========================= SECTION CONTENT ========================= -->
+        <section class="section-content padding-y">
+        <div class="container">
+        
+        <div class="row">
+            
+        <main class="col-md-12">                 
+
+        <header class="border-bottom mb-4 pb-3">
+                <div class="form-inline">
+                    <span class="mr-md-auto">{{ total }} Orders found </span>
+                    <p class="mr-2">
+                       My Orders
+                    </p>
+                </div>
+        </header><!-- sect-heading -->
+        
+        <div class="row">
+            <div class="col-md-4" *ngFor="let o of orders">
+                <figure class="card card-product-grid">
+                    <figcaption class="info-wrap">
+                        <div class="fix-height">
+                            <span class="text-muted"> Name: </span>
+                            <label class="title text-primary">{{ o.productName }}</label>
+                            <br>
+                            <span class="text-muted"> Desciption: </span>
+                            <label class="text">{{ o.desc }}</label>
+                            <div class="price-wrap mb-4">
+                                <span class="text-muted"> Price: </span>
+                                <b><span class="price">${{ o.price }}</span></b>
+                            </div> <!-- price-wrap.// -->
+                            <span class="text-muted"> Date: </span>
+                            <label class="text">{{ o.orderDate.substring(0,10) }}</label>
+                        </div>
+                        <label class="btn btn-block btn-primary" > <label class="h5 text-truncate"> Order ID: {{ o.oderId.substring(0,10) }}  </label></label>
+                    </figcaption>
+                </figure>
+            </div> <!-- col.// -->
+        </div> <!-- row end.// -->
+        
+        
+            </main> <!-- col.// -->
+        
+        </div>
+        
+        </div> <!-- container .//  -->
+        </section>
+        <!-- ========================= SECTION CONTENT END// ========================= -->
+    

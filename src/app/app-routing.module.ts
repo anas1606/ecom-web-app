@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { LoginComponent } from './login/login.component';
+import { MyordersComponent } from './myorders/myorders.component';
+import { ProfileComponent } from './profile/profile.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { VendorFeedComponent } from './vendor-feed/vendor-feed.component';
 import { VendorProfileComponent } from './vendor-profile/vendor-profile.component';
@@ -31,6 +33,14 @@ const routes: Routes = [
    component: EmailVerificationComponent,
    pathMatch : "full"
   },
+  { path: 'myorders',
+   component: MyordersComponent,
+   pathMatch : "full"
+  },
+  { path: 'profile',
+   component: ProfileComponent,
+   pathMatch : "full"
+  },
   { path: 'vendor/login',
    component: VendorloginComponent,
    pathMatch : "full"
@@ -42,7 +52,7 @@ const routes: Routes = [
   { path: 'vendor/profile',
    component: VendorProfileComponent,
    pathMatch : "full"
-  }
+  },
 ];
 
 @NgModule({

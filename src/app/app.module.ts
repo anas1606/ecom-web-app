@@ -15,7 +15,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { VendorloginComponent } from './vendorlogin/vendorlogin.component';
 import { VendorFeedComponent } from './vendor-feed/vendor-feed.component';
-import { VendorProfileComponent } from './vendor-profile/vendor-profile.component'; 
+import { VendorProfileComponent } from './vendor-profile/vendor-profile.component';
+import { MyordersComponent } from './myorders/myorders.component';
+import { ProfileComponent } from './profile/profile.component'; 
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { VendorProfileComponent } from './vendor-profile/vendor-profile.componen
     VendorloginComponent,
     VendorFeedComponent,
     VendorProfileComponent,
+    MyordersComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

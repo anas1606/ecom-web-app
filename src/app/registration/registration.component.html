@@ -171,7 +171,7 @@
 
                                     <!-- Pincode -->
                                     <div class="mb-4">
-                                        <input type="number" formControlName="pincode" id="pincode" class="form-control" placeholder="Pincode" aria-describedby="defaultRegisterFormPhoneHelpBlock" maxlength="6">
+                                        <input type="text" formControlName="pincode" id="pincode" class="form-control" placeholder="Pincode" aria-describedby="defaultRegisterFormPhoneHelpBlock" maxlength="6">
                                         <div class="err" *ngIf="submitted && validate.pincode.errors">
                                             <div *ngIf="validate.pincode.errors.required" class="text-left text-danger">
                                                 *Required 
@@ -230,10 +230,10 @@
                                         <!-- E-mail -->
                                         <div class="mb-4">
                                             <input type="email" formControlName = "email" id="email" class="form-control" placeholder="E-mail">
-                                            <div class="err" *ngIf="validate.email.errors">
-                                                <!-- <div *ngIf="validate.email.errors.required" class="text-left text-danger">
+                                            <div class="err" *ngIf=" submitted && validate.email.errors">
+                                                <div *ngIf="validate.email.errors.required" class="text-left text-danger">
                                                     *Required 
-                                                </div> -->
+                                                </div>
                                                 <div *ngIf="validate.email.errors.email" class="text-left text-danger">
                                                     Invalid Email ..@
                                                 </div>
@@ -252,10 +252,10 @@
                                         <!-- Confirm Password -->
                                         <div class="mb-4">
                                             <input type="password" formControlName="confirmpassword" id="confirmpassword" class="form-control" placeholder="Confirm Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
-                                            <div class="err" *ngIf="validate.confirmpassword.errors">
-                                                <!-- <div *ngIf="validate.confirmpassword.errors.required" class="text-left text-danger">
+                                            <div class="err" *ngIf="submitted && validate.confirmpassword.errors">
+                                                <div *ngIf="validate.confirmpassword.errors.required" class="text-left text-danger">
                                                     *Required 
-                                                </div> -->
+                                                </div>
                                                 <div *ngIf="validate.confirmpassword.errors.MustMatch" class="text-left text-danger">
                                                     ConfirmPassword Didn't Match 
                                                 </div>
@@ -316,7 +316,7 @@
     
                                         <!-- Pincode -->
                                         <div class="mb-4">
-                                            <input type="number" formControlName="pincode" id="pincode" class="form-control" placeholder="Pincode" aria-describedby="defaultRegisterFormPhoneHelpBlock" maxlength="6">
+                                            <input type="text" formControlName="pincode" id="pincode" class="form-control" placeholder="Pincode" aria-describedby="defaultRegisterFormPhoneHelpBlock" maxlength="6">
                                             <div class="err" *ngIf="submitted && validate.pincode.errors">
                                                 <div *ngIf="validate.pincode.errors.required" class="text-left text-danger">
                                                     *Required 

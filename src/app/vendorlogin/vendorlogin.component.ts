@@ -11,6 +11,7 @@ export class VendorloginComponent implements OnInit {
   constructor(private loginservice: LoginServiceService) { }
 
   ngOnInit(): void {
+    this.loginservice.isCustomerVisible = false;
   }
 
   onSignin(inputEmail:any , pswd:any){

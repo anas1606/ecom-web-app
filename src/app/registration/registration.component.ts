@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DropdownService } from '../dropdown.service';
 import { Router } from '@angular/router';
 import { RegisterService } from '../register.service';
+import { LoginServiceService } from '../login-service.service';
 
 @Component({
   selector: 'app-registration',
@@ -25,7 +26,7 @@ export class RegistrationComponent implements OnInit {
   gender: string = "MALE";
   
 
-  constructor(private router:Router, private formbuilder: FormBuilder , private dropdownservice: DropdownService , private registerService: RegisterService ,private http: HttpClient) {
+  constructor(private router:Router, private formbuilder: FormBuilder , private dropdownservice: DropdownService , private registerService: RegisterService ,private http: HttpClient , private loginService:LoginServiceService) {
       this.reactiveForm = this.formbuilder.group({
       email: new FormControl('',[Validators.required,Validators.email]),
       firstname: new FormControl(null,[Validators.required]),
@@ -83,6 +84,8 @@ export class RegistrationComponent implements OnInit {
     this.dropdownservice.getHobby().subscribe(data => {
       this.hobby = JSON.parse(JSON.stringify(data.data));
     });
+    this.loginService.isCustomerVisible = false;
+    this.reactiveForm.controls['companyname'].disable(); 
   }
 
   onChangeCountry(name:string){
@@ -99,8 +102,10 @@ export class RegistrationComponent implements OnInit {
   onOptionChange(event:any){
     if(event.target.value == "vendor"){
       this.isVendor = true;
+      this.reactiveForm.controls['companyname'].enable(); 
     }else{
       this.isVendor = false;
+      this.reactiveForm.controls['companyname'].disable(); 
     }
   }
 
@@ -130,7 +135,7 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-    if(this.selectedCounrty != 'Country' && this.selectedState != 'State'){
+    if(this.selectedCounrty != 'Country' && this.selectedState != 'State' && this.reactiveForm.valid ){
       
       if(this.isVendor){
         this.vendorRegister();

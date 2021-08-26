@@ -10,9 +10,11 @@ import { LoginServiceService } from '../login-service.service';
 export class LoginComponent implements OnInit {
 
   constructor(private loginservice: LoginServiceService) {
+    this.loginservice.isCustomerVisible = false;
   }
 
   ngOnInit(): void{
+    this.loginservice.isCustomerVisible = false;
   }
 
   onSignin(inputEmail:any , pswd:any){
