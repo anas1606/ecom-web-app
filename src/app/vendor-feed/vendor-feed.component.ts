@@ -164,6 +164,12 @@ export class VendorFeedComponent implements OnInit {
     });
   }
 
+  onGetCategory(){
+    this.dropdownservice.getCategory().subscribe(data=>{
+      this.category = data.data;
+    });
+  }
+
   counter(i: number) {
     return new Array(i);
   }

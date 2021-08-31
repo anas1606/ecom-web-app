@@ -48,6 +48,9 @@
                                                 <div *ngIf="validate.firstname.errors.required" class="text-left text-danger">
                                                     *Required 
                                                 </div>
+                                                <div *ngIf="validate.firstname.errors.pattern" class="text-left text-danger">
+                                                    *Enter Valid Name
+                                                </div>
                                             </div>
                                         </div>
 
@@ -57,6 +60,9 @@
                                             <div class="err" *ngIf="submitted && validate.lastname.errors">
                                                 <div *ngIf="validate.lastname.errors.required" class="text-left text-danger">
                                                     *Required 
+                                                </div>
+                                                <div *ngIf="validate.lastname.errors.pattern" class="text-left text-danger">
+                                                    *Enter Valid Name
                                                 </div>
                                             </div>
                                         </div>
@@ -82,6 +88,9 @@
                                             <div *ngIf="validate.password.errors.required" class="text-left text-danger">
                                                 *Required 
                                             </div>
+                                            <div *ngIf="validate.password.errors.pattern" class="text-left text-danger">
+                                                *Enter Valid password
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- Confirm Password -->
@@ -103,6 +112,9 @@
                                         <div class="err" *ngIf="submitted && validate.phoneno.errors">
                                             <div *ngIf="validate.phoneno.errors.required" class="text-left text-danger">
                                                 *Required 
+                                            </div>
+                                            <div *ngIf="validate.phoneno.errors.pattern" class="text-left text-danger">
+                                                *Enter Valid PhoneNo
                                             </div>
                                         </div>
                                     </div>
@@ -135,6 +147,9 @@
                                             <div *ngIf="validate.address1.errors.required" class="text-left text-danger">
                                                 *Required 
                                             </div>
+                                            <div *ngIf="validate.address1.errors.pattern" class="text-left text-danger">
+                                                *Enter Valid Address
+                                            </div>
                                         </div>
                                     </div>
 
@@ -144,6 +159,9 @@
                                         <div class="err" *ngIf="submitted && validate.address2.errors">
                                             <div *ngIf="validate.address2.errors.required" class="text-left text-danger">
                                                 *Required 
+                                            </div>
+                                            <div *ngIf="validate.address2.errors.pattern" class="text-left text-danger">
+                                                *Enter Valid Address
                                             </div>
                                         </div>
                                     </div>
@@ -176,6 +194,9 @@
                                             <div *ngIf="validate.pincode.errors.required" class="text-left text-danger">
                                                 *Required 
                                             </div>
+                                            <div *ngIf="validate.pincode.errors.pattern" class="text-left text-danger">
+                                                *Enter Valid pincode
+                                            </div>
                                         </div>
                                     </div>
 
@@ -203,6 +224,9 @@
                                                     <div *ngIf="validate.firstname.errors.required" class="text-left text-danger">
                                                         *Required 
                                                     </div>
+                                                    <div *ngIf="validate.firstname.errors.pattern" class="text-left text-danger">
+                                                        *Enter Valid Name
+                                                    </div>
                                                 </div>
                                             </div>
     
@@ -212,6 +236,9 @@
                                                 <div class="err" *ngIf="submitted && validate.lastname.errors">
                                                     <div *ngIf="validate.lastname.errors.required" class="text-left text-danger">
                                                         *Required 
+                                                    </div>
+                                                    <div *ngIf="validate.lastname.errors.pattern" class="text-left text-danger">
+                                                        *Enter Valid Name
                                                     </div>
                                                 </div>
                                             </div>
@@ -223,6 +250,9 @@
                                             <div class="err" *ngIf="submitted && validate.companyname.errors">
                                                 <div *ngIf="validate.companyname.errors.required" class="text-left text-danger">
                                                     *Required 
+                                                </div>
+                                                <div *ngIf="validate.companyname.errors.pattern" class="text-left text-danger">
+                                                    *Enter Valid Name
                                                 </div>
                                             </div>
                                         </div>
@@ -247,6 +277,9 @@
                                                 <div *ngIf="validate.password.errors.required" class="text-left text-danger">
                                                     *Required 
                                                 </div>
+                                                <div *ngIf="validate.password.errors.pattern" class="text-left text-danger">
+                                                    *Enter Valid Password
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- Confirm Password -->
@@ -269,6 +302,9 @@
                                                 <div *ngIf="validate.phoneno.errors.required" class="text-left text-danger">
                                                     *Required 
                                                 </div>
+                                                <div *ngIf="validate.phoneno.errors.pattern" class="text-left text-danger">
+                                                    *Enter Valid PhoneNo
+                                                </div>
                                             </div>
                                         </div>
                                         
@@ -280,6 +316,9 @@
                                                 <div *ngIf="validate.address1.errors.required" class="text-left text-danger">
                                                     *Required 
                                                 </div>
+                                                <div *ngIf="validate.address1.errors.pattern" class="text-left text-danger">
+                                                    *Enter Valid Address
+                                                </div>
                                             </div>
                                         </div>
     
@@ -289,6 +328,9 @@
                                             <div class="err" *ngIf="submitted && validate.address2.errors">
                                                 <div *ngIf="validate.address2.errors.required" class="text-left text-danger">
                                                     *Required 
+                                                </div>
+                                                <div *ngIf="validate.address2.errors.pattern" class="text-left text-danger">
+                                                    *Enter Valid Address
                                                 </div>
                                             </div>
                                         </div>
@@ -320,6 +362,9 @@
                                             <div class="err" *ngIf="submitted && validate.pincode.errors">
                                                 <div *ngIf="validate.pincode.errors.required" class="text-left text-danger">
                                                     *Required 
+                                                </div>
+                                                <div *ngIf="validate.pincode.errors.pattern" class="text-left text-danger">
+                                                    *Enter Valid Pincode
                                                 </div>
                                             </div>
                                         </div>

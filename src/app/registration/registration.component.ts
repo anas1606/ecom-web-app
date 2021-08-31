@@ -24,20 +24,19 @@ export class RegistrationComponent implements OnInit {
   avatar: any;
   isVendor = false;
   gender: string = "MALE";
-  
 
   constructor(private router:Router, private formbuilder: FormBuilder , private dropdownservice: DropdownService , private registerService: RegisterService ,private http: HttpClient , private loginService:LoginServiceService) {
       this.reactiveForm = this.formbuilder.group({
       email: new FormControl('',[Validators.required,Validators.email]),
-      firstname: new FormControl(null,[Validators.required]),
-      lastname: new FormControl(null,[Validators.required]),
-      password: new FormControl('',[Validators.required]),
+      firstname: new FormControl('',[Validators.required,  Validators.pattern( "^[^\s]." )]),
+      lastname: new FormControl('',[Validators.required, Validators.pattern( "^[^\s]." )]),
+      password: new FormControl('',[Validators.required, Validators.pattern( "^[^\s]." )]),
       confirmpassword: new FormControl('',[Validators.required]),
-      phoneno: new FormControl(null,[Validators.required]),
-      address1: new FormControl(null,[Validators.required]),
-      address2: new FormControl(null,[Validators.required]),
-      pincode: new FormControl(null,[Validators.required]),
-      companyname: new FormControl(null,[Validators.required]),
+      phoneno: new FormControl('',[Validators.required, Validators.pattern( "^[^\s]." )]),
+      address1: new FormControl('',[Validators.required,Validators.pattern( "^[^\s]." )]),
+      address2: new FormControl('',[Validators.required,Validators.pattern( "^[^\s]." )]),
+      pincode: new FormControl('',[Validators.required,Validators.pattern( "^[^\s]." )]),
+      companyname: new FormControl('',[Validators.required,Validators.pattern( "^[^\s]." )]),
       avatar: null
     },
     {
@@ -167,7 +166,6 @@ export class RegistrationComponent implements OnInit {
       this.registerService.vendorRegister(data,this.avatar);
   }
 
-
   customerRegister(){
       const data = {
         "firstName" : this.reactiveForm.controls['firstname'].value,
@@ -184,6 +182,12 @@ export class RegistrationComponent implements OnInit {
         "hobby" : this.hobbyList
       };
     this.registerService.customerRegister(data,this.avatar);
+  }
+
+  public noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
   }
 
 }

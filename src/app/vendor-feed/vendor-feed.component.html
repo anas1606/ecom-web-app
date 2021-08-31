@@ -95,7 +95,7 @@
                                 <input type="number" #price class="form-control" id="price" placeholder="0.0">
                             </div>
                             <div ngbDropdown class="d-inline-block col-xl-12 mt-4">
-                                <label class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle> {{ categoryToAdd }} </label>
+                                <label class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle (click) = "onGetCategory()"> {{ categoryToAdd }} </label>
                                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                                     <label ngbDropdownItem *ngFor="let c of category" (click) = "onChangeCategory(c)"> {{ c }} </label>
                                 </div>
