@@ -28,15 +28,15 @@ export class RegistrationComponent implements OnInit {
   constructor(private router:Router, private formbuilder: FormBuilder , private dropdownservice: DropdownService , private registerService: RegisterService ,private http: HttpClient , private loginService:LoginServiceService) {
       this.reactiveForm = this.formbuilder.group({
       email: new FormControl('',[Validators.required,Validators.email]),
-      firstname: new FormControl('',[Validators.required,  Validators.pattern( "^[^\s]." )]),
-      lastname: new FormControl('',[Validators.required, Validators.pattern( "^[^\s]." )]),
-      password: new FormControl('',[Validators.required, Validators.pattern( "^[^\s]." )]),
+      firstname: new FormControl('',[Validators.required,  Validators.pattern( "^[^\\s]+" )]),
+      lastname: new FormControl('',[Validators.required, Validators.pattern( "^[^\\s]+" )]),
+      password: new FormControl('',[Validators.required, Validators.pattern( "^[^\\s]+" )]),
       confirmpassword: new FormControl('',[Validators.required]),
-      phoneno: new FormControl('',[Validators.required, Validators.pattern( "^[^\s]." )]),
-      address1: new FormControl('',[Validators.required,Validators.pattern( "^[^\s]." )]),
-      address2: new FormControl('',[Validators.required,Validators.pattern( "^[^\s]." )]),
-      pincode: new FormControl('',[Validators.required,Validators.pattern( "^[^\s]." )]),
-      companyname: new FormControl('',[Validators.required,Validators.pattern( "^[^\s]." )]),
+      phoneno: new FormControl('',[Validators.required, Validators.pattern( "^[^\\s]+" )]),
+      address1: new FormControl('',[Validators.required,Validators.pattern( "^[^\\s]+" )]),
+      address2: new FormControl('',[Validators.required,Validators.pattern( "^[^\\s]+" )]),
+      pincode: new FormControl('',[Validators.required,Validators.pattern( "^[^\\s]+" )]),
+      companyname: new FormControl('',[Validators.required,Validators.pattern( "^[^\\s]+" )]),
       avatar: null
     },
     {
