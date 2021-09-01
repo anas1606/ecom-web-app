@@ -89,6 +89,7 @@ export class RegistrationComponent implements OnInit {
 
   onChangeCountry(name:string){
     this.selectedCounrty = name; 
+    this.selectedState = "State";
     this.dropdownservice.getState(name).subscribe(data => {
       this.state = JSON.parse(JSON.stringify(data.data));
     });
