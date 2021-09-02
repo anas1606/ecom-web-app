@@ -1,4 +1,5 @@
     
+    <app-loader></app-loader>
     <!-- ========================= SECTION PAGETOP ========================= -->
     <section class="section-pagetop bg">
     <div class="container">
@@ -16,7 +17,7 @@
             
     <div class="card">
         <article class="filter-group">
-            <div class="filter-content collapse show" id="collapse_1" style="">
+            <div class="filter-content collapse show" id="collapse_1">
                 <div class="card-body">
                     <form class="pb-3">
                     <div class="input-group">
@@ -36,7 +37,7 @@
                     <h6 class="title text-primary"> Category </h6>
                 </span>
             </header>
-            <div class="filter-content collapse show" id="collapse_2" style="">
+            <div class="filter-content collapse show" id="collapse_2">
                 <div class="card-body">
                     <label class="custom-control custom-checkbox" *ngFor="let c of category">
                         <input type="checkbox" class="custom-control-input" [value] = c name = "category" (change) = "oncategorySelect($event)" [checked]="selectedcategory == c">

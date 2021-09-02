@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TokenService } from './token.service';
 import { HttpClient } from '@angular/common/http';
+import { LoaderService } from './loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ export class VendorService {
 
   constructor(private tokenService:TokenService,
     private http: HttpClient,
-    private tokenservice:TokenService) { }
+    private tokenservice:TokenService,
+    private loderService:LoaderService) { }
 
   feed (data:any){
     const headers = {'Content-Type': 'application/json' , 'Authorization' : this.tokenService.getToken()};
@@ -27,12 +29,14 @@ export class VendorService {
   }
 
   uploadProfile(avatar:any){
+    this.loderService.show()
     const headers = {'Authorization' : this.tokenService.getToken()};
     var formData: any = new FormData();
     formData.append("profile", avatar);
-
+  
     return this.http.post<any>('http://localhost:8080/api/vendor/upload/profile', formData, { headers }).subscribe(data=>{
       alert(data.message);
+      window.location.reload();
     });
   }
 

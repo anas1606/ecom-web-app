@@ -1,3 +1,4 @@
+<app-loader></app-loader>
 <header class="section-header">
     <section class="header-main border-bottom">
         <div class="container">
@@ -92,14 +93,18 @@
                             </div>
                             <div class="form-group">
                                 <label for="price">Price</label>
-                                <input type="number" #price class="form-control" id="price" placeholder="0.0">
+                                <input type="number" #price class="form-control" id="price" placeholder="0.0" min = "0">
                             </div>
-                            <div ngbDropdown class="d-inline-block col-xl-12 mt-4">
+                            <select class="d-inline-block col-xl-12 mt-4" id="exampleFormControlSelect1" (click) = "onGetCategory()" (change) = "onChangeCategory($event)">
+                                <option> Category </option>
+                                <option *ngFor="let c of category">{{ c }}</option>
+                            </select>
+                            <!--<div ngbDropdown class="d-inline-block col-xl-12 mt-4">
                                 <label class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle (click) = "onGetCategory()"> {{ categoryToAdd }} </label>
                                 <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
                                     <label ngbDropdownItem *ngFor="let c of category" (click) = "onChangeCategory(c)"> {{ c }} </label>
                                 </div>
-                            </div>
+                            </div>-->
                             <button type="button" class="btn btn-success mt-4 col-xl-12" (click) = "addProduct(name.value,desc.value,price.value)"> Add </button>
                           </form>
                         </div>

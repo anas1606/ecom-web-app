@@ -125,6 +125,9 @@ export class VendorProfileComponent implements OnInit {
     window.location.reload();
   }
 
+  getProfileURL() : string{
+      return this.profile.profile_url + "?" + new Date().getTime(); 
+  }
   validat(code:any){
     if(code == 401)
       this.router.navigate(["/vendor/login"]);

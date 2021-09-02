@@ -140,28 +140,32 @@ export class VendorFeedComponent implements OnInit {
     });
   }
 
-  onChangeCategory(name:any){
-    this.categoryToAdd = name; 
-    console.log(this.categoryToAdd);
+  onChangeCategory(event:any){
+    this.categoryToAdd = event.target.value; 
   }
 
   addProduct(name:string,desc:string,price:any){
-    console.log(name,desc,price);
-    const data = {
-      "productName" : name,
-	    "desc" : desc,
-	    "price" : price,
-	    "category" : this.categoryToAdd
-    }
-    this.vendorservice.addProduct(data).subscribe(data=>{
-      if(data.statusCode == 200){
-        alert(data.message);
-        window.location.reload();
-      }else{
-        this.validate(data.statusCode);
-        alert(data.message);
+    if(this.categoryToAdd != "Category" && name.length > 0 && price > 0){
+      const data = {
+        "productName" : name,
+        "desc" : desc,
+        "price" : price,
+        "category" : this.categoryToAdd
       }
-    });
+      this.vendorservice.addProduct(data).subscribe(data=>{
+        if(data.statusCode == 200){
+          alert(data.message);
+          window.location.reload();
+        }else{
+          this.validate(data.statusCode);
+          alert(data.message);
+        }
+      });
+    }else{
+      alert("Fill All the Fields");
+      if(price == 0 || price < 0 )
+        alert("price can not be 0 or negative")
+    }
   }
 
   onGetCategory(){
